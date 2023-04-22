@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -110,5 +111,31 @@ class MemberServiceTest {
 
         String nickName = findMember.get().getNickName();
         System.out.println(nickName);
+    }
+
+    @Test
+    void 내가_리서인_스터디_조회() {
+        Member leader = create("user1", "leader");
+        Study myStudy1 = createStudy("my study1", leader);
+        Study myStudy2 = createStudy("my study2", leader);
+
+        Member member = create("user2", "member");
+        Study study1 = createStudy("study1", member);
+        Study study2 = createStudy("study2", member);
+
+        List<Study> allStudies = studyService.getAll();
+        List<MyStudy> allMyStudies = myStudyService.getAll();
+        assertThat(allStudies.size()).isEqualTo(4);
+        assertThat(allMyStudies.size()).isEqualTo(4);
+
+        List<MyStudy> myStudyOnlyLeader = memberService.getMyStudyOnlyLeader(leader);
+        assertThat(myStudyOnlyLeader.size()).isEqualTo(2);
+
+        for (MyStudy myStudy : myStudyOnlyLeader) {
+            String studyLeader = myStudy.getStudy().getLeader();
+            assertThat(studyLeader).isEqualTo(leader.getNickName());
+        }
+
+
     }
 }

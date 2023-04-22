@@ -95,6 +95,11 @@ public class MyStudyService {
         return RsData.of("F-1", "존재하지 않는 id 입니다.");
     }
 
+    //-- find all --//
+    public List<MyStudy> getAll() {
+        return myStudyRepository.findAll();
+    }
+
     //-- find by member, study --//
     public RsData<MyStudy> getMyStudy(Member member, Study study) {
         List<MyStudy> myStudies = member.getMyStudies();

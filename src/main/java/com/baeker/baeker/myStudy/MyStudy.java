@@ -82,7 +82,7 @@ public class MyStudy {
 
     // my study 생성 //
     private static MyStudy create(Member member, Study study) {
-        return builder()
+        return MyStudy.builder()
                 .member(member)
                 .study(study)
                 .build();

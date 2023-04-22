@@ -57,7 +57,7 @@ public class Member {
 
     //-- crate method --//
     protected static Member createMember(String provider, String username, String name, String about, String password, Integer profileImg) {
-        return builder()
+        return Member.builder()
                 .provider(provider)
                 .username(username)
                 .nickName(name)

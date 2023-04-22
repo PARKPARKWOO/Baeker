@@ -52,7 +52,7 @@ public class Study {
 
     //-- create method --//
     public static Study createStudy(String name, String about, Integer capacity, Member member) {
-        return builder()
+        return Study.builder()
                 .name(name)
                 .about(about)
                 .leader(member.getNickName())
