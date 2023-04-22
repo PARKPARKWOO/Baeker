@@ -36,7 +36,7 @@ public class MyStudy {
     private LocalDateTime joinDate;
 
 
-    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @ManyToOne(fetch = LAZY)
     private Member member;
 
     @ManyToOne(fetch = LAZY)
@@ -82,10 +82,11 @@ public class MyStudy {
 
     // my study 생성 //
     private static MyStudy create(Member member, Study study) {
-        return MyStudy.builder()
-                .member(member)
-                .study(study)
-                .build();
+        MyStudy myStudy = new MyStudy();
+        myStudy.member = member;
+        myStudy.study = study;
+
+        return myStudy;
     }
 
 

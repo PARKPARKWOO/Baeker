@@ -51,6 +51,7 @@ public class InitDB {
             // 알파가 스터디 "Baeker lover" 생성
             StudyCreateForm studyFrom0 = new StudyCreateForm("Baeker lover", "Provident cupiditate voluptatem et in.", 10);
             Study study0 = studyService.create(studyFrom0, member0).getData();
+            myStudyService.create(member0, study0);
 
             // init 맴버 8명 생성후 "Baeker lover" 에 가입
             for (int i = 2; i < 10; i++) {
@@ -67,6 +68,7 @@ public class InitDB {
             // 베타가 스터디 "Study Baeker" 생성
             StudyCreateForm studyFrom1 = new StudyCreateForm("Study Baeker", "Quaerat voluptatem et cupiditate in.", 10);
             Study study1 = studyService.create(studyFrom1, member1).getData();
+            myStudyService.create(member1, study1);
 
             // 알파가 "Study Baeker" 가입
             MyStudy myStudy = myStudyService.join(member0, study1, "hi").getData();

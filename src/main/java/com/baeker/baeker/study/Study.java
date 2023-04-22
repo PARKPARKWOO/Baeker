@@ -52,13 +52,14 @@ public class Study {
 
     //-- create method --//
     public static Study createStudy(String name, String about, Integer capacity, Member member) {
-        return Study.builder()
-                .name(name)
-                .about(about)
-                .leader(member.getNickName())
-                .capacity(capacity)
-                .xp(0)
-                .build();
+        Study study = new Study();
+        study.name = name;
+        study.about = about;
+        study.leader = member.getNickName();
+        study.capacity = capacity;
+        study.xp = 0;
+
+        return study;
     }
 
 

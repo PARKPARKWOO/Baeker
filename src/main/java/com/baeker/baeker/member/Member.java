@@ -57,14 +57,15 @@ public class Member {
 
     //-- crate method --//
     protected static Member createMember(String provider, String username, String name, String about, String password, Integer profileImg) {
-        return Member.builder()
-                .provider(provider)
-                .username(username)
-                .nickName(name)
-                .about(about)
-                .password(password)
-                .profileImg(profileImg)
-                .build();
+        Member member = new Member();
+        member.provider = provider;
+        member.username = username;
+        member.nickName = name;
+        member.about = about;
+        member.password = password;
+        member.profileImg = profileImg;
+
+        return member;
     }
 
     //-- business logic --//

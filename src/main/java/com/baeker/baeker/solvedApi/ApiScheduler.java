@@ -47,7 +47,7 @@ public class ApiScheduler {
 //        }
 //    }
 
-//    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 1000)
     public void checkStudyRule() throws IOException, ParseException {
         log.info("스케줄러 실행");
         RsData<List<Member>> memberList = memberService.getAll();
