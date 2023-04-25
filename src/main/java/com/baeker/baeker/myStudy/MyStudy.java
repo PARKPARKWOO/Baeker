@@ -36,7 +36,7 @@ public class MyStudy {
     private LocalDateTime joinDate;
 
 
-    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @ManyToOne(fetch = LAZY)
     private Member member;
 
     @ManyToOne(fetch = LAZY)

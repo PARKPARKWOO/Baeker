@@ -171,4 +171,18 @@ public class MyStudyService {
         MyStudy modify = myStudy.modifyMsg(msg);
         return myStudyRepository.save(modify);
     }
+
+    //-- 초대, 가입 요청 삭제 --//
+    @Transactional
+    public RsData delete(MyStudy myStudy) {
+
+        StudyStatus status = myStudy.getStatus();
+
+        myStudyRepository.delete(myStudy);
+
+        if (status == StudyStatus.INVITING)
+            return RsData.of("S-1", "초대를 거절했습니다.");
+        else
+            return RsData.of("S-1", "가입 요청을 취소했습니다.");
+    }
 }

@@ -14,10 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -131,7 +128,7 @@ public class MyStudyController {
         MyStudy myStudy = myStudyRs.getData();
         Member member = rq.getMember();
 
-        if (!myStudy.getMember().getNickName().equals(member.getNickName())){
+        if (!myStudy.getMember().getNickName().equals(member.getNickName())) {
             log.info("승인 요청자가 본인이 아님 my nickname = {}, 요청자 name = {}", member.getNickName(), myStudy.getMember().getNickName());
             return rq.historyBack("권한이 없습니다.");
         }
@@ -164,7 +161,7 @@ public class MyStudyController {
         MyStudy myStudy = myStudyRs.getData();
         Member member = rq.getMember();
 
-        if (!myStudy.getStudy().getLeader().equals(member.getNickName())){
+        if (!myStudy.getStudy().getLeader().equals(member.getNickName())) {
             log.info("승인 요청자가 스터디 리더가 아님 nick name = {}, leader = {}", member.getNickName(), myStudy.getStudy().getLeader());
             return rq.historyBack("권한이 없습니다.");
         }
@@ -178,5 +175,57 @@ public class MyStudyController {
 
         log.info("정식 스터디 원으로 승인 완료");
         return rq.redirectWithMsg("/study/detail/member/" + myStudy.getStudy().getId(), acceptRs.getMsg());
+    }
+
+    //-- 나의 초대, 가입 요청 삭제 --//
+    @DeleteMapping("/me/delete/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public String myReject(
+            @PathVariable Long id
+    ) {
+        log.info("초대 거절 요청 확인 my study id = {}", id);
+        Member member = rq.getMember();
+        RsData<MyStudy> myStudyRs = myStudyService.getMyStudy(id);
+
+        if (myStudyRs.isFail()) {
+            log.info("my study 조회 실패 error = {}", myStudyRs.getMsg());
+            return rq.historyBack(myStudyRs.getMsg());
+        }
+
+        MyStudy myStudy = myStudyRs.getData();
+        if (!member.getNickName().equals(myStudy.getMember().getNickName())) {
+            log.info("거절 요청자가 본인이 아님 my nickname = {}, 요청자 name = {}", member.getNickName(), myStudy.getMember().getNickName());
+            return rq.historyBack("권한이 없습니다.");
+        }
+
+        RsData rsData = myStudyService.delete(myStudy);
+        log.info("초대 거절 완료");
+        return rq.redirectWithMsg("/member/profile/join", rsData.getMsg());
+    }
+
+    //-- 스터디 초대, 가입 요청 삭제 --//
+    @DeleteMapping("/study/delete/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public String studyReject(
+            @PathVariable Long id
+    ) {
+        log.info("초대 거절 요청 확인 my study id = {}", id);
+        Member member = rq.getMember();
+        RsData<MyStudy> myStudyRs = myStudyService.getMyStudy(id);
+
+        if (myStudyRs.isFail()) {
+            log.info("my study 조회 실패 error = {}", myStudyRs.getMsg());
+            return rq.historyBack(myStudyRs.getMsg());
+        }
+
+        MyStudy myStudy = myStudyRs.getData();
+        if (!member.getNickName().equals(myStudy.getStudy().getLeader())) {
+            log.info("거절 요청자가 스터디 리더가 아님 nick name = {}, leader = {}", member.getNickName(), myStudy.getStudy().getLeader());
+            return rq.historyBack("권한이 없습니다.");
+        }
+
+        RsData rsData = myStudyService.delete(myStudy);
+        log.info("초대 거절 완료");
+        return rq.redirectWithMsg("/member/profile/join", rsData.getMsg());
     }
 }

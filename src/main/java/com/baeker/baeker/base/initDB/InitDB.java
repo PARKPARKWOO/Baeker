@@ -50,6 +50,7 @@ public class InitDB {
             // user 알파와 알파의 스터디 생성
             Member alpha = createMember("user1", "알파", "안녕하세요 알파입니다.", 100);
             Study study = createStudy("알파의 스터디", "Provident cupiditate voluptatem et in.", 10, alpha);
+            createStudy("알파알파", "Provident cupiditate voluptatem et in.", 10, alpha);
 
             // 더미 user 7명 생성후 알파 스터디 가입
             for (int i = 3; i < 10; i++) {
@@ -63,7 +64,15 @@ public class InitDB {
 
             // user 베타와 베타의 스터디 생성
             Member beta = createMember("user2", "베타", "안녕하세요 베타입니다.", 200);
-            Study study = createStudy("베타의 스터디", "Quaerat voluptatem et cupiditate in.", 10, beta);
+            Study study1 = createStudy("베타의 스터디", "Quaerat voluptatem et cupiditate in.", 10, beta);
+            Study study2 = createStudy("베타베타", "Quaerat voluptatem et cupiditate in.", 10, beta);
+
+            // 베타가 알파 초대
+            Member alpha = memberService.getMember(1L).getData();
+            myStudyService.invite(beta, alpha, study1, "초대합니다.");
+
+            // 알파가 스터디 가입 요청
+            myStudyService.join(alpha, study2, "가입 원해요.");
         }
 
         public void init_dummy_user() {

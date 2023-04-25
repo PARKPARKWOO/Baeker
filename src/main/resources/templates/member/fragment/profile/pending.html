@@ -18,14 +18,19 @@
               method="post" class="mt-5 mb-5 flex flex-col">
 
 
-      <textarea th:text="${myStudy.msg}" name="msg" placeholder="메시지 수정"
-                th:disabled="${myStudy.status eq T(com.baeker.baeker.myStudy.StudyStatus).INVITING} ? 'disabled'"
-                class="textarea textarea-ghost mb-5 mt-5 w-full"></textarea>
+          <textarea th:text="${myStudy.msg}" name="msg" placeholder="메시지 수정"
+                    th:disabled="${myStudy.status eq T(com.baeker.baeker.myStudy.StudyStatus).INVITING} ? 'disabled'"
+                    class="textarea textarea-ghost mb-5 mt-5 w-full"></textarea>
 
 
             <button th:if="${myStudy.status eq T(com.baeker.baeker.myStudy.StudyStatus).PENDING}"
                     class="btn btn-primary">메시지 수정하기
             </button>
+        </form>
+
+        <form th:action="@{/my_study/me/delete/{id}(id=${myStudy.id})}" th:method="DELETE">
+            <button th:text="${myStudy.status eq T(com.baeker.baeker.myStudy.StudyStatus).INVITING}? '거절하기' : '취소하기'"
+                    class="btn btn-primary mt-4 w-full" type="submit">초대 수락</button>
         </form>
 
         <form th:if="${myStudy.status eq T(com.baeker.baeker.myStudy.StudyStatus).INVITING}"
