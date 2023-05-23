@@ -33,9 +33,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // 타임 리프 사용하는 경우만 추가
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' // 타임 리프 사용하는 경우만 추가
 
-    // spring cloud
-    implementation 'org.springframework.cloud:spring-cloud-config-server' // cloud config
-
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
