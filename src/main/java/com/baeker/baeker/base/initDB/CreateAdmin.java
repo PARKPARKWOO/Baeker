@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.util.Optional;
 
-@Profile({"dev", "prod"})
+@Profile("dev")
 @Configuration
 @RequiredArgsConstructor
 public class CreateAdmin {
@@ -24,7 +24,7 @@ public class CreateAdmin {
 
     @PostConstruct
     public void init() throws IOException, ParseException {
-        initService.init_alpha_and_study();
+        initService.createAdmin();
     }
 
     @Component
@@ -36,7 +36,7 @@ public class CreateAdmin {
         private final SolvedApiService solvedApiService;
 
 
-        public void init_alpha_and_study() throws IOException, ParseException {
+        public void createAdmin() throws IOException, ParseException {
 
             Optional<Member> member = memberService.getMember("admin");
             if (member.isEmpty()) {
