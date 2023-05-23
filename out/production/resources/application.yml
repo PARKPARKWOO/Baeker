@@ -11,6 +11,19 @@ spring:
     password: ENC(OH+qshDPtFh1h1gDdWExzz/t0BlOzVbo)
     url: ENC(L4aT4GfkEsf36RsmLcicmZmhfwgA7o3VTkq0GMSRBorX3d++tPdam9QXDcnR99LE+6YH3dImFev/dHPxJ1+l9++i2B8cg6IHw3Y508pY/zARtnynx6yle453gCfUJkYAzBH2kEtzTeB7cyEvXiXqUIkVgOevG6NMOk3Eth8Kroib8xkHWpFNOOWnSt72b7dC)
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ENC(EnGEuiNi8se1PXYrqy+PxI2vcLBn3DGx)
+    password: ENC(cqAYQgTmw7Ze3I5X+tqACkP8Ai5vr+DCPvV9cv8n2uk=)
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+
   security:
     oauth2:
       client:
@@ -57,6 +70,7 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
+        default_batch_fetch_size: 10
         format_sql: true
         show_sql: true
 

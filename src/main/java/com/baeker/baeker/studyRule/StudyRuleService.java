@@ -1,5 +1,7 @@
 package com.baeker.baeker.studyRule;
 
+import com.baeker.baeker.base.email.EmailService;
+import com.baeker.baeker.base.email.MailDto;
 import com.baeker.baeker.base.request.Rq;
 import com.baeker.baeker.base.request.RsData;
 import com.baeker.baeker.myStudy.MyStudy;
@@ -11,6 +13,7 @@ import com.baeker.baeker.study.StudyService;
 import com.baeker.baeker.study.snapshot.StudySnapShotRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.BatchSize;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +38,7 @@ public class StudyRuleService {
 
     private final RuleService ruleService;
     private final StudySnapShotRepository studySnapShotRepository;
+    private final EmailService emailService;
 
 
     /**
@@ -177,7 +181,11 @@ public class StudyRuleService {
             log.info("study xp ++");
         } else {
             setMission(studyRule.getId(), false);
-            log.info("xp 추가안됨 ");
+            List<MyStudy> myStudies = studyRule.getStudy().getMyStudies();
+            for (MyStudy myStudy : myStudies) {
+                emailService.mailSend(new MailDto(myStudy.getMember().getEmail(),
+                        String.format("%s 미션 실패 메일입니다.", studyName), "오늘 하루도 화이팅 입니다 :)"));
+            }
         }
 
 

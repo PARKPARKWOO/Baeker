@@ -35,6 +35,8 @@ out/
 /.nb-gradle/
 
 ### VS Code ###
-.vscode
+.vscode/
 
 ### custom ###
+baeker-ncp.pem
+baeker-pro.pem
