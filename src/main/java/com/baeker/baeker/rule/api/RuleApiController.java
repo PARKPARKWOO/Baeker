@@ -15,15 +15,18 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/rule")
 public class RuleApiController {
 
     private final RuleService ruleService;
 
     /**
      * 생성
+     * param
+     * name, about, xp,
+     * count, provider, difficulty
      */
-    @PostMapping("/rule")
+    @PostMapping("/rules")
     public CreateRuleResponse createRule(@RequestBody @Valid CreateRuleRequest request) {
         RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(), request.getXp().toString(),request.getCount().toString(), request.getProvider(), request.getDifficulty());
         Rule rule = ruleService.create(ruleForm).getData();
@@ -33,8 +36,11 @@ public class RuleApiController {
 
     /**
      * 수정
+     * param
+     * name, about, xp
+     * count, provider, difficulty
      */
-    @PutMapping("/rule/{id}")
+    @PutMapping("/{id}")
     public ModifyRuleResponse modifyRule(@PathVariable("id") Long id,
                                          @RequestBody @Valid ModifyRuleRequest request) {
         RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(), request.getXp().toString(),request.getCount().toString(), request.getProvider(), request.getDifficulty());
@@ -47,7 +53,8 @@ public class RuleApiController {
     /**
      * 조회
      */
-    @GetMapping("/rule/search")
+    //모든 항목 조회
+    @GetMapping("/search")
     public Result searchRule() {
         List<Rule> rules = ruleService.getRuleList();
         List<RuleDto> collect = rules.stream()
@@ -55,6 +62,13 @@ public class RuleApiController {
                 .toList();
         return new Result(collect);
     }
+
+    // 1개 조회
+//    @GetMapping("/search/{id}")
+//    public Result searchIdRule(@PathVariable Long id) {
+//        Rule rule = ruleService.getRule(id).getData();
+//        return new Result()
+//    }
 
     /**
      * DTO Request
