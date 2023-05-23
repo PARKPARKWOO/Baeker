@@ -2,16 +2,8 @@ package com.baeker.baeker.base.initDB;
 
 import com.baeker.baeker.member.Member;
 import com.baeker.baeker.member.MemberService;
-import com.baeker.baeker.member.embed.BaekJoonDto;
 import com.baeker.baeker.member.form.MemberJoinForm;
-import com.baeker.baeker.myStudy.MyStudy;
-import com.baeker.baeker.myStudy.MyStudyService;
-import com.baeker.baeker.rule.RuleForm;
-import com.baeker.baeker.rule.RuleService;
 import com.baeker.baeker.solvedApi.SolvedApiService;
-import com.baeker.baeker.study.Study;
-import com.baeker.baeker.study.StudyService;
-import com.baeker.baeker.study.form.StudyCreateForm;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
@@ -22,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
-@Profile({"dev", "prod"})
+@Profile("dev")
 @Configuration
 @RequiredArgsConstructor
 public class CreateAdmin {
@@ -31,7 +23,7 @@ public class CreateAdmin {
 
     @PostConstruct
     public void init() throws IOException, ParseException {
-        initService.init_alpha_and_study();
+        initService.createAdmin();
     }
 
     @Component
@@ -43,7 +35,7 @@ public class CreateAdmin {
         private final SolvedApiService solvedApiService;
 
 
-        public void init_alpha_and_study() throws IOException, ParseException {
+        public void createAdmin() throws IOException, ParseException {
 
             createMember("admin", "운영자", "", "https://avatars.dicebear.com/api/avataaars/600.svg", "sunnight9507");
         }
