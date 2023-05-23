@@ -30,12 +30,18 @@ public class RuleController {
     @GetMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String showCreate(RuleForm ruleForm) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg("/rule/list", "관리자만 접근가능합니다");
+        }
         return "rule/create";
     }
 
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String create(@Valid RuleForm ruleForm, BindingResult bindingResult) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg("/rule/list", "관리자만 접근가능합니다");
+        }
         RsData<Rule> rsData = ruleService.create(ruleForm);
         if (rsData.isFail() || bindingResult.hasErrors()) {
             return rq.historyBack(rsData);
@@ -50,6 +56,9 @@ public class RuleController {
     @GetMapping("/modify/{id}")
     @PreAuthorize("isAuthenticated()")
     public String showModify(@PathVariable("id") Long id, RuleForm ruleForm) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg(String.format("/rule/detail/%d", id), "관리자만 접근가능합니다");
+        }
         RsData<Rule> rsData = this.ruleService.getRule(id);
         if (rsData.isFail()) {
             return rq.historyBack(rsData);
@@ -62,6 +71,9 @@ public class RuleController {
     @PostMapping("/modify/{id}")
     @PreAuthorize("isAuthenticated()")
     public String modify(@PathVariable("id") Long id, @Valid RuleForm ruleForm, BindingResult bindingResult) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg(String.format("/rule/detail/%d", id), "관리자만 접근가능합니다");
+        }
         RsData<Rule> rsData = ruleService.getRule(id);
         if (rsData.isFail() || bindingResult.hasErrors()) {
             return rq.historyBack("다시 확인해주세요");
@@ -76,6 +88,9 @@ public class RuleController {
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("isAuthenticated()")
     public String delete(@PathVariable("id") Long id) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg(String.format("/rule/detail/%d", id), "관리자만 접근가능합니다");
+        }
         RsData<Rule> rsData = ruleService.getRule(id);
         if (rsData.isSuccess()) {
             ruleService.delete(rsData.getData());
