@@ -28,6 +28,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web' // web
     developmentOnly 'org.springframework.boot:spring-boot-devtools' // devtools
 
+    // SMPT
+    implementation 'org.springframework.boot:spring-boot-starter-mail' // mail
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // 타임 리프 사용하는 경우만 추가
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' // 타임 리프 사용하는 경우만 추가
+
     // spring cloud
     implementation 'org.springframework.cloud:spring-cloud-config-server' // cloud config
 

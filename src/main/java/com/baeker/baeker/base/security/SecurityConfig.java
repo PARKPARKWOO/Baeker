@@ -48,7 +48,9 @@ public class SecurityConfig {
                         logout -> logout
                                 .logoutUrl("/member/logout")
                                 .logoutSuccessUrl("/")
-                ).build();
+                )
+                .csrf().disable()
+                .build();
     }
 
     @Bean
