@@ -174,7 +174,7 @@ public class MemberService {
     //-- 프로필 닉네임, 소개, 이미지 변경 실질적인 처리 --//
     private RsData<Member> modify(Member member, String nickName, String about, String profileImg) {
 
-        if (nickName.contains("운영자"))
+        if (nickName.contains("운영자") && !member.getUsername().equals("admin"))
             return RsData.of("F-1", nickName + "(은)는 사용할 수 없는 이름입니다.");
 
         List<MyStudy> myStudies = myStudyQRepository.findLeader(member);
