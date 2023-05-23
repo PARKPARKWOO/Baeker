@@ -40,6 +40,11 @@
             form.xp.focus();
             return;
         }
+        if (form.xp.value < 0) {
+            toastWarning('경험치를 양수로 작성해주세요!');
+            form.xp.focus();
+            return;
+        }
 
         //== 문제 풀이 수 ==//
 
@@ -56,6 +61,11 @@
             return;
         }
 
+        if (form.count.value < 0) {
+            toastWarning('count 를 양수로 적어주세요');
+            form.count.focus();
+            return;
+        }
 
         //-- OJ 사이트 검증 --//
         const $checkedProviderRadioButton = $(form).find("[name=provider]:checked");
@@ -73,8 +83,6 @@
             $(form).find("[name=difficulty]:first").focus();
             return;
         }
-
-
 
 
         //-- 폼 발송 --//

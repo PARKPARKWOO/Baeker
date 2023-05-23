@@ -6,34 +6,21 @@ import com.baeker.baeker.base.request.RsData;
 import com.baeker.baeker.member.Member;
 import com.baeker.baeker.member.MemberService;
 import com.baeker.baeker.member.embed.BaekJoonDto;
-import com.baeker.baeker.member.snapshot.MemberSnapshot;
-import com.baeker.baeker.member.snapshot.MemberSnapshotRepository;
-import com.baeker.baeker.myStudy.MyStudy;
-import com.baeker.baeker.study.Study;
-import com.baeker.baeker.study.StudyService;
-import com.baeker.baeker.study.snapshot.StudySnapShot;
-import com.baeker.baeker.study.snapshot.StudySnapShotRepository;
 import com.baeker.baeker.studyRule.StudyRule;
 import com.baeker.baeker.studyRule.StudyRuleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,10 +35,6 @@ public class ApiScheduler {
 
     private final ApplicationEventPublisher publisher;
     private final StudyRuleService studyRuleService;
-    private final MemberSnapshotRepository memberSnapshotRepository;
-
-    private final StudyService studyService;
-    private final StudySnapShotRepository studySnapShotRepository;
 
     /**
      * 티어 별 check
