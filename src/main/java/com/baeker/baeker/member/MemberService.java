@@ -38,6 +38,8 @@ public class MemberService {
     private final StudyService studyService;
     private final MemberSnapshotRepository memberSnapshotRepository;
 
+    String url = "";
+
     /**
      ** 조회 관련 method **
      * find by username
