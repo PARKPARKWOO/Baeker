@@ -2,16 +2,8 @@ package com.baeker.baeker.base.initDB;
 
 import com.baeker.baeker.member.Member;
 import com.baeker.baeker.member.MemberService;
-import com.baeker.baeker.member.embed.BaekJoonDto;
 import com.baeker.baeker.member.form.MemberJoinForm;
-import com.baeker.baeker.myStudy.MyStudy;
-import com.baeker.baeker.myStudy.MyStudyService;
-import com.baeker.baeker.rule.RuleForm;
-import com.baeker.baeker.rule.RuleService;
 import com.baeker.baeker.solvedApi.SolvedApiService;
-import com.baeker.baeker.study.Study;
-import com.baeker.baeker.study.StudyService;
-import com.baeker.baeker.study.form.StudyCreateForm;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
