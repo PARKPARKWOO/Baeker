@@ -31,7 +31,7 @@ public class RuleServiceTests {
     @DisplayName(value = "생성 메서드 동작 테스트")
     void createTests() {
         //생성 메서드 //
-        RuleForm ruleForm = new RuleForm("aaaa", "소개", "1", "3", "bj", "BRONZE");
+        RuleForm ruleForm = new RuleForm("aaaa", "소개", 1, 3, "bj", "BRONZE");
         RsData<Rule> rsData = ruleService.create(ruleForm);
         Rule rule = rsData.getData();
         assertThat(rule.getName()).isEqualTo("aaaa");
@@ -47,14 +47,14 @@ public class RuleServiceTests {
     @DisplayName("수정 메서드 테스트")
     void modifyTests() {
         //생성 메서드 //
-        RuleForm ruleForm = new RuleForm("aaaa", "소개", "1", "5","bj", "BRONZE");
+        RuleForm ruleForm = new RuleForm("aaaa", "소개", 1, 5,"bj", "BRONZE");
         RsData<Rule> rsData = ruleService.create(ruleForm);
         Rule rule = rsData.getData();
         assertThat(rule.getName()).isEqualTo("aaaa");
 
 
         //수정 메서드 //
-        RuleForm ruleForm1 = new RuleForm("wy9295", "소개2", "2", "6","boj2", "GOLD");
+        RuleForm ruleForm1 = new RuleForm("wy9295", "소개2", 2, 6,"boj2", "GOLD");
         Optional<Rule> optionalRule = ruleRepository.findByName("aaaa");
         if (optionalRule.isEmpty()) {
             System.out.println("실패 테스트임 !! 값이없다!!!!!!");
@@ -74,7 +74,7 @@ public class RuleServiceTests {
     @DisplayName("삭제 메서드 테스트")
     void deleteTests() {
         //생성 메서드 //
-        RuleForm ruleForm = new RuleForm("aaaa", "소개", "1", "7","bj", "BRONZE");
+        RuleForm ruleForm = new RuleForm("aaaa", "소개", 1, 7,"bj", "BRONZE");
         RsData<Rule> rsData = ruleService.create(ruleForm);
         Rule rule = rsData.getData();
         assertThat(rule.getName()).isEqualTo("aaaa");

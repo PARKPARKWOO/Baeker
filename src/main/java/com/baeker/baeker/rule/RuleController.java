@@ -2,8 +2,10 @@ package com.baeker.baeker.rule;
 
 import com.baeker.baeker.base.request.Rq;
 import com.baeker.baeker.base.request.RsData;
+import com.baeker.baeker.global.exception.NotFoundData;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.h2.engine.DbObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,12 +32,18 @@ public class RuleController {
     @GetMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String showCreate(RuleForm ruleForm) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg("/rule/list", "관리자만 접근가능합니다");
+        }
         return "rule/create";
     }
 
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String create(@Valid RuleForm ruleForm, BindingResult bindingResult) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg("/rule/list", "관리자만 접근가능합니다");
+        }
         RsData<Rule> rsData = ruleService.create(ruleForm);
         if (rsData.isFail() || bindingResult.hasErrors()) {
             return rq.historyBack(rsData);
@@ -50,18 +58,28 @@ public class RuleController {
     @GetMapping("/modify/{id}")
     @PreAuthorize("isAuthenticated()")
     public String showModify(@PathVariable("id") Long id, RuleForm ruleForm) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg(String.format("/rule/detail/%d", id), "관리자만 접근가능합니다");
+        }
         RsData<Rule> rsData = this.ruleService.getRule(id);
         if (rsData.isFail()) {
             return rq.historyBack(rsData);
         }
         Rule rule = rsData.getData();
-        ruleService.setForm(rule.getId(), ruleForm);
+        try {
+            ruleService.setForm(rule.getId(), ruleForm);
+        } catch (NotFoundData e) {
+            e.printStackTrace();
+        }
         return "rule/create";
     }
 
     @PostMapping("/modify/{id}")
     @PreAuthorize("isAuthenticated()")
     public String modify(@PathVariable("id") Long id, @Valid RuleForm ruleForm, BindingResult bindingResult) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg(String.format("/rule/detail/%d", id), "관리자만 접근가능합니다");
+        }
         RsData<Rule> rsData = ruleService.getRule(id);
         if (rsData.isFail() || bindingResult.hasErrors()) {
             return rq.historyBack("다시 확인해주세요");
@@ -76,6 +94,9 @@ public class RuleController {
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("isAuthenticated()")
     public String delete(@PathVariable("id") Long id) {
+        if (!rq.getMember().getUsername().equals("admin")) {
+            return rq.redirectWithMsg(String.format("/rule/detail/%d", id), "관리자만 접근가능합니다");
+        }
         RsData<Rule> rsData = ruleService.getRule(id);
         if (rsData.isSuccess()) {
             ruleService.delete(rsData.getData());
@@ -91,7 +112,7 @@ public class RuleController {
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0")
-                       int page, String keyword) {
+    int page, String keyword) {
 
         Page<Rule> paging;
         if (keyword != null) {

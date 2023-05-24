@@ -1,4 +1,4 @@
-package com.baeker.baeker.global;
+package com.baeker.baeker.global.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

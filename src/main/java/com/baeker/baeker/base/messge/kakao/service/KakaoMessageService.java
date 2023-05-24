@@ -2,6 +2,7 @@ package com.baeker.baeker.base.messge.kakao.service;
 
 import com.baeker.baeker.base.messge.kakao.dto.KakaoFriendListDto;
 import com.baeker.baeker.base.messge.kakao.dto.KakaoMessageDto;
+import com.baeker.baeker.base.request.Rq;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;

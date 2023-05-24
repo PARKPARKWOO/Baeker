@@ -1,6 +1,8 @@
 package com.baeker.baeker.rule;
 
 import com.baeker.baeker.base.request.RsData;
+import com.baeker.baeker.global.exception.NotFoundData;
+import com.baeker.baeker.global.exception.NumberInputException;
 import com.baeker.baeker.studyRule.StudyRule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -29,8 +32,8 @@ public class RuleService {
         Rule rule = Rule.builder()
                 .name(ruleForm.getName())
                 .about(ruleForm.getAbout())
-                .xp(Integer.parseInt(ruleForm.getXp()))
-                .count(Integer.parseInt(ruleForm.getCount()))
+                .xp(ruleForm.getXp())
+                .count(ruleForm.getCount())
                 .provider(ruleForm.getProvider())
                 .difficulty(ruleForm.getDifficulty())
                 .build();
@@ -51,7 +54,8 @@ public class RuleService {
                 .name(ruleForm.getName())
                 .about(ruleForm.getAbout())
                 .provider(ruleForm.getProvider())
-                .xp(Integer.parseInt(ruleForm.getXp()))
+                .xp(ruleForm.getXp())
+                .count(ruleForm.getCount())
                 .difficulty(ruleForm.getDifficulty())
                 .build();
         ruleRepository.save(rule1);
@@ -60,12 +64,30 @@ public class RuleService {
 
     public void setForm(Long ruleId, RuleForm ruleForm) {
         Rule rule = getRule(ruleId).getData();
-        ruleForm.setName(rule.getName());
-        ruleForm.setAbout(rule.getAbout());
-        ruleForm.setXp(rule.getXp().toString());
-        ruleForm.setCount(rule.getCount().toString());
-        ruleForm.setProvider(rule.getProvider());
-        ruleForm.setDifficulty(rule.getDifficulty());
+
+        if (rule.getName() != null) {
+            ruleForm.setName(rule.getName());
+        } else {
+            throw new NotFoundData("이름이 없음");
+        }
+        ruleForm.setXp(rule.getXp());
+        ruleForm.setCount(rule.getCount());
+        if (rule.getAbout() != null) {
+            ruleForm.setAbout(rule.getAbout());
+        } else {
+            throw new NotFoundData("소개 없음");
+        }
+        if (rule.getProvider() != null) {
+            ruleForm.setProvider(rule.getProvider());
+        } else {
+            throw new NotFoundData("OJ 입력없음");
+        }
+        if (rule.getDifficulty() != null) {
+            ruleForm.setDifficulty(rule.getDifficulty());
+        } else {
+            throw new NotFoundData("난이도 없음");
+        }
+
     }
 
     /**

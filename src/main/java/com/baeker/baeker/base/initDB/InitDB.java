@@ -51,6 +51,8 @@ public class InitDB {
         private final SolvedApiService solvedApiService;
         private final RuleService ruleService;
 
+        private Long alphaId;
+
 
         public void init_alpha_and_study() throws IOException, ParseException {
 
@@ -60,6 +62,7 @@ public class InitDB {
             Study study = createStudy("알파의 스터디", "Provident cupiditate voluptatem et in.", 10, alpha);
             createStudy("알파알파", "Provident cupiditate voluptatem et in.", 10, alpha);
 
+            alphaId = alpha.getId();
 
             // 더미 user 3명 생성후 알파 스터디 가입
             for (int i = 3; i < 10; i++) {
@@ -78,7 +81,7 @@ public class InitDB {
             Study study2 = createStudy("베타베타", "Quaerat voluptatem et cupiditate in.", 10, beta);
 
             // 베타가 알파 초대
-            Member alpha = memberService.getMember(1L).getData();
+            Member alpha = memberService.getMember(alphaId).getData();
             myStudyService.invite(beta, alpha, study1, "초대합니다.");
 
             // 알파가 스터디 가입 요청
@@ -100,7 +103,7 @@ public class InitDB {
         public void initData() {
 
             // rule 목록확인
-            RuleForm ruleForm = new RuleForm("이름", "소개", "1", "5","백준", "GOLD");
+            RuleForm ruleForm = new RuleForm("이름", "소개", 1, 5,"백준", "GOLD");
 
             for (int i = 0; i < 15; i++) {
                 ruleService.create(ruleForm);

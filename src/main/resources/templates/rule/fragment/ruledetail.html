@@ -63,23 +63,30 @@
                     <button class="btn btn-primary">목록</button>
                 </form>
             </div>
+
             <div class="p-1">
                 <form th:action="@{|/rule/delete/${rule.id}|}" th:method="DELETE">
-                    <button class="btn btn-primary"  onclick="deleteItem(); return false;">삭제</button>
+
+                    <button class="btn btn-primary" onclick="deleteItem(); return false;">삭제</button>
+
                 </form>
             </div>
+
             <div class="p-1">
 
                 <form th:action="@{|/rule/modify/${rule.id}|}" method="get">
+
                     <button class="btn btn-primary" onclick="editItem(); return false;">수정</button>
+
                 </form>
             </div>
-               <!-- Rule -> StudyRule 생성 현재는 비활성화  -->
-<!--            <div class="p-1">-->
-<!--                <form th:action="@{|/studyRule/create/${rule.id}|}" method="get">-->
-<!--                    <button class="btn btn-primary" onclick="confirm()">룰 선택</button>-->
-<!--                </form>-->
-<!--            </div>-->
+
+            <!-- Rule -> StudyRule 생성 현재는 비활성화  -->
+            <!--            <div class="p-1">-->
+            <!--                <form th:action="@{|/studyRule/create/${rule.id}|}" method="get">-->
+            <!--                    <button class="btn btn-primary" onclick="confirm()">룰 선택</button>-->
+            <!--                </form>-->
+            <!--            </div>-->
         </div>
     </div>
 
