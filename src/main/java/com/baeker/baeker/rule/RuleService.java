@@ -1,6 +1,7 @@
 package com.baeker.baeker.rule;
 
 import com.baeker.baeker.base.request.RsData;
+import com.baeker.baeker.global.exception.NumberInputException;
 import com.baeker.baeker.studyRule.StudyRule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -57,15 +59,79 @@ public class RuleService {
         ruleRepository.save(rule1);
         RsData.of("S-1", "규칙이 수정 되었습니다.", rule1);
     }
+    /**
+     * PATCH
+     * @param id
+     * @param updates
+     * @return
+     */
+    public RuleForm updateRule(Long id, Map<String, String> updates) {
+        String name = updates.get("name");
+        String about = updates.get("about");
+        String strXp = updates.get("xp");
+        String strCount = updates.get("count");
+        String provider = updates.get("provider");
+        String difficulty = updates.get("difficulty");
+
+        RuleForm ruleForm = new RuleForm();
+        setForm(id, ruleForm);
+        if (name != null) {
+            ruleForm.setName(name);
+        }
+        if (about != null) {
+            ruleForm.setAbout(about);
+        }
+        if (strXp != null) {
+            try {
+                Integer xp = Integer.parseInt(strXp);
+                ruleForm.setXp(xp.toString());
+            } catch (NumberFormatException e) {
+                throw new NumberInputException("xp는 숫자로 입력해주세요");
+            }
+        }
+        if (strCount != null) {
+            try {
+                Integer count = Integer.parseInt(strCount);
+                ruleForm.setCount(count.toString());
+            } catch (NumberFormatException e) {
+                throw new NumberInputException("Count는 숫자로 입력해주세요");
+            }
+        }
+        if (provider != null) {
+            ruleForm.setProvider(provider);
+        }
+        if (difficulty != null) {
+            ruleForm.setDifficulty(difficulty);
+        }
+        return ruleForm;
+    }
 
     public void setForm(Long ruleId, RuleForm ruleForm) {
         Rule rule = getRule(ruleId).getData();
-        ruleForm.setName(rule.getName());
-        ruleForm.setAbout(rule.getAbout());
-        ruleForm.setXp(rule.getXp().toString());
-        ruleForm.setCount(rule.getCount().toString());
-        ruleForm.setProvider(rule.getProvider());
-        ruleForm.setDifficulty(rule.getDifficulty());
+        Optional<String> name = Optional.of(rule.getName());
+        Optional<String> about = Optional.of(rule.getAbout());
+        Optional<Integer> xp = Optional.of(rule.getXp());
+        Optional<Integer> count = Optional.of(rule.getCount());
+        Optional<String > provider = Optional.of(rule.getProvider());
+        Optional<String> difficulty = Optional.of(rule.getDifficulty());
+        if (name.isPresent()) {
+            ruleForm.setName(name.get());
+        }
+        if (about.isPresent()) {
+            ruleForm.setAbout(about.get());
+        }
+        if (xp.isPresent()) {
+            ruleForm.setXp(xp.get().toString());
+        }
+        if (count.isPresent()) {
+            ruleForm.setXp(count.get().toString());
+        }
+        if (provider.isPresent()) {
+            ruleForm.setCount(provider.get());
+        }
+        if (difficulty.isPresent()) {
+            ruleForm.setDifficulty(difficulty.get());
+        }
     }
 
     /**
