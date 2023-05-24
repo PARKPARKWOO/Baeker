@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Profile({"dev", "prod"})
 @Configuration
@@ -45,7 +46,10 @@ public class CreateAdmin {
 
         public void init_alpha_and_study() throws IOException, ParseException {
 
-            createMember("admin", "운영자", "", "https://avatars.dicebear.com/api/avataaars/600.svg", "sunnight9507");
+            Optional<Member> member = memberService.getMember("admin");
+            if (member.isEmpty()) {
+                createMember("admin", "운영자", "", "https://avatars.dicebear.com/api/avataaars/600.svg", "sunnight9507");
+            }
         }
 
         private Member createMember(String username, String nickName, String about, String img, String baekJoonName) throws IOException, ParseException {
