@@ -63,8 +63,12 @@ public class RuleController {
         if (rsData.isFail()) {
             return rq.historyBack(rsData);
         }
-        Rule rule = rsData.getData();
-        ruleService.setForm(rule.getId(), ruleForm);
+        try {
+            Rule rule = rsData.getData();
+            ruleService.setForm(rule.getId(), ruleForm);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         return "rule/create";
     }
 
