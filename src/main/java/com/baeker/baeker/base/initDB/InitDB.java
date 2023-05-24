@@ -103,7 +103,7 @@ public class InitDB {
         public void initData() {
 
             // rule 목록확인
-            RuleForm ruleForm = new RuleForm("이름", "소개", "1", "5","백준", "GOLD");
+            RuleForm ruleForm = new RuleForm("이름", "소개", 1, 5,"백준", "GOLD");
 
             for (int i = 0; i < 15; i++) {
                 ruleService.create(ruleForm);

@@ -23,10 +23,10 @@ public class RuleForm {
 
     @NotEmpty
     @Size(min = 1, max = 10)
-    private String xp;
+    private int xp;
 
     @NotEmpty
-    private String count;
+    private int count;
 
     @NotBlank
     private String provider;

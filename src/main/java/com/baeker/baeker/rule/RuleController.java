@@ -2,8 +2,10 @@ package com.baeker.baeker.rule;
 
 import com.baeker.baeker.base.request.Rq;
 import com.baeker.baeker.base.request.RsData;
+import com.baeker.baeker.global.exception.NotFoundData;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.h2.engine.DbObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -63,10 +65,10 @@ public class RuleController {
         if (rsData.isFail()) {
             return rq.historyBack(rsData);
         }
+        Rule rule = rsData.getData();
         try {
-            Rule rule = rsData.getData();
             ruleService.setForm(rule.getId(), ruleForm);
-        } catch (NullPointerException e) {
+        } catch (NotFoundData e) {
             e.printStackTrace();
         }
         return "rule/create";
@@ -110,7 +112,7 @@ public class RuleController {
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0")
-                       int page, String keyword) {
+    int page, String keyword) {
 
         Page<Rule> paging;
         if (keyword != null) {
