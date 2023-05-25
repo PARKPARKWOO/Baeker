@@ -39,5 +39,12 @@ out/
 
 ### custom ###
 baeker-ncp.pem
+<<<<<<< HEAD
 baeker-pro.pem
+<<<<<<< HEAD
 
+=======
+=======
+baeker-pro.pem
+>>>>>>> f2b8cb8 (test 환경설정)
+>>>>>>> 637aa2b (충돌 수정)
