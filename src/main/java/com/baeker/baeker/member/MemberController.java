@@ -1,7 +1,5 @@
 package com.baeker.baeker.member;
 
-import com.baeker.baeker.base.email.EmailService;
-import com.baeker.baeker.base.email.MailDto;
 import com.baeker.baeker.base.request.Rq;
 import com.baeker.baeker.base.request.RsData;
 import com.baeker.baeker.member.embed.BaekJoonDto;
@@ -35,7 +33,6 @@ public class MemberController {
     private final MemberService memberService;
     private final MyStudyService myStudyService;
     private final SolvedApiService solvedApiService;
-    private final EmailService emailService;
     private final Rq rq;
 
 
@@ -139,11 +136,6 @@ public class MemberController {
         if (modifyRs.isFail()) {
             log.info("정보 등록에 실패했습니다. error = {}", modifyRs.getMsg());
             return rq.historyBack(modifyRs.getMsg());
-        }
-
-        if (!member.getEmail().isEmpty()) {
-            emailService.mailSend(new MailDto(member.getEmail(), member.getNickName() + "님의 BAEKER 회원가입을 축하합니다!", "알고리즘 스터디를 더욱 체계적이고 효율적으로 관리하는데 도움이 됩니다."));
-            log.info("email 발송 성공");
         }
 
         log.info("내정보 등록 성공");
