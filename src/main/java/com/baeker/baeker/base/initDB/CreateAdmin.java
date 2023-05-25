@@ -42,8 +42,6 @@ public class CreateAdmin {
                 createMember("admin", "운영자", "", "https://avatars.dicebear.com/api/avataaars/600.svg", "sunnight9507");
             }
         }
-
-
         private Member createMember(String username, String nickName, String about, String img, String baekJoonName) throws IOException, ParseException {
             MemberJoinForm form = new MemberJoinForm(username, nickName, about, "1234", "1234", img);
             Member member = memberService.join(form).getData();
