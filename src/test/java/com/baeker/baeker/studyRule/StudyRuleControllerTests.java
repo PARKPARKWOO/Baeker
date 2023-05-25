@@ -52,7 +52,7 @@ public class StudyRuleControllerTests {
         MemberJoinForm memberJoinForm = new MemberJoinForm("user11", "user11", "소개", "1234","1234", "");
         Member member = memberService.join(memberJoinForm).getData();
 
-        RuleForm ruleForm = new RuleForm("name", "about", "1", "3","provider", "GOLD");
+        RuleForm ruleForm = new RuleForm("name", "about", 1, 3,"provider", "GOLD");
         Rule rule = ruleService.create(ruleForm).getData();
     }
 

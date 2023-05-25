@@ -117,7 +117,6 @@ public class Member extends ScoreBase {
         return grantedAuthorities;
     }
 
-
     //-- init db 용 create method --//
     protected  static Member initMemberCreate(String provider, String username, String name, String about, String password, String profileImg, String baekJoonName, BaekJoonDto dto) {
         return builder()
