@@ -37,7 +37,6 @@ public class CreateAdmin {
 
 
         public void createAdmin() throws IOException, ParseException {
-
             Optional<Member> member = memberService.getMember("admin");
             if (member.isEmpty()) {
                 createMember("admin", "운영자", "", "https://avatars.dicebear.com/api/avataaars/600.svg", "sunnight9507");
