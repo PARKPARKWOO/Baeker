@@ -1,10 +1,7 @@
 package com.baeker.baeker.member;
 
-import com.baeker.baeker.base.email.EmailService;
-import com.baeker.baeker.base.email.MailDto;
 import com.baeker.baeker.base.request.Rq;
 import com.baeker.baeker.base.request.RsData;
-import com.baeker.baeker.member.embed.BaekJoonDto;
 import com.baeker.baeker.member.form.*;
 import com.baeker.baeker.member.snapshot.MemberSnapshot;
 
@@ -13,7 +10,6 @@ import com.baeker.baeker.myStudy.MyStudyService;
 import com.baeker.baeker.myStudy.form.MyStudyInviteForm;
 import com.baeker.baeker.myStudy.form.MyStudyModfyMsgForm;
 import com.baeker.baeker.solvedApi.SolvedApiService;
-import jakarta.mail.internet.AddressException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +32,6 @@ public class MemberController {
     private final MemberService memberService;
     private final MyStudyService myStudyService;
     private final SolvedApiService solvedApiService;
-    private final EmailService emailService;
     private final Rq rq;
 
 
@@ -142,11 +137,6 @@ public class MemberController {
             return rq.historyBack(modifyRs.getMsg());
         }
 
-        if (!member.getEmail().isEmpty()) {
-            emailService.mailSend(new MailDto(member.getEmail(), member.getNickName() + "님의 BAEKER 회원가입을 축하합니다!", "알고리즘 스터디를 더욱 체계적이고 효율적으로 관리하는데 도움이 됩니다."));
-            log.info("email 발송 성공");
-        }
-
         log.info("내정보 등록 성공");
         return "redirect:/member/connect";
     }
@@ -176,7 +166,7 @@ public class MemberController {
 
         if (!getUser) {
             log.info("존재하지 않는 id 입니다.");
-            return rq.historyBack(baekJoonName + "은(는) 존재하지 않는 id 입니다.");
+            return rq.historyBack( baekJoonName + "은(는) 존재하지 않는 id 입니다.");
         }
         RsData<Member> connectRs = memberService.connectBaekJoon(rq.getMember(), baekJoonName);
         solvedApiService.getSolvedCount(rq.getMember().getId());

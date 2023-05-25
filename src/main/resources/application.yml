@@ -78,6 +78,16 @@ logging.level:
   org.hibernate:
     SQL: debug
     orm.jdbc.bind: trace
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+
+
+### custom ###
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor

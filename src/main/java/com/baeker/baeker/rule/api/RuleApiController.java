@@ -28,7 +28,7 @@ public class RuleApiController {
      */
     @PostMapping("/rules")
     public CreateRuleResponse createRule(@RequestBody @Valid CreateRuleRequest request) {
-        RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(), request.getXp().toString(),request.getCount().toString(), request.getProvider(), request.getDifficulty());
+        RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(),request.getXp() , request.getCount(), request.getProvider(), request.getDifficulty());
         Rule rule = ruleService.create(ruleForm).getData();
 
         return new CreateRuleResponse(rule.getId());
@@ -43,7 +43,7 @@ public class RuleApiController {
     @PutMapping("/{id}")
     public ModifyRuleResponse modifyRule(@PathVariable("id") Long id,
                                          @RequestBody @Valid ModifyRuleRequest request) {
-        RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(), request.getXp().toString(),request.getCount().toString(), request.getProvider(), request.getDifficulty());
+        RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(),request.getXp(), request.getCount(), request.getProvider(), request.getDifficulty());
         ruleService.modify(id, ruleForm);
         Rule rule = ruleService.getRule(id).getData();
 
@@ -81,9 +81,9 @@ public class RuleApiController {
 
         private String about;
 
-        private Integer xp;
+        private int xp;
 
-        private Integer count;
+        private int count;
         private String provider;
 
         private String difficulty;
@@ -94,9 +94,9 @@ public class RuleApiController {
     static class ModifyRuleRequest {
         private String name;
         private String about;
-        private Integer xp;
+        private int xp;
 
-        private Integer count;
+        private int count;
         private String provider;
         private String difficulty;
     }
@@ -119,8 +119,8 @@ public class RuleApiController {
     static class ModifyRuleResponse {
         private String name;
         private String about;
-        private Integer xp;
-        private Integer count;
+        private int xp;
+        private int count;
         private String provider;
         private String difficulty;
     }
@@ -140,8 +140,8 @@ public class RuleApiController {
     static class RuleDto {
         private String name;
         private String about;
-        private Integer xp;
-        private Integer count;
+        private int xp;
+        private int count;
         private String provider;
         private String difficulty;
     }

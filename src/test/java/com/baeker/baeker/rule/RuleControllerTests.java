@@ -48,7 +48,7 @@ public class RuleControllerTests {
         MemberJoinForm memberJoinForm = new MemberJoinForm("user10", "user10", "소개", "1234", "1234", "");
         Member member = memberService.join(memberJoinForm).getData();
 
-        RuleForm ruleForm = new RuleForm("name", "about", "2", "3","provider", "GOLD");
+        RuleForm ruleForm = new RuleForm("name", "about", 2, 3,"provider", "GOLD");
     }
 
 //    @Test
