@@ -141,8 +141,10 @@ public class MemberController {
             return rq.historyBack(modifyRs.getMsg());
         }
 
-        emailService.mailSend(new MailDto(member.getEmail(), member.getNickName() + "님의 BAEKER 회원가입을 축하합니다!", "알고리즘 스터디를 더욱 체계적이고 효율적으로 관리하는데 도움이 됩니다."));
-        log.info("email 발송 성공");
+        if (!member.getEmail().isEmpty()) {
+            emailService.mailSend(new MailDto(member.getEmail(), member.getNickName() + "님의 BAEKER 회원가입을 축하합니다!", "알고리즘 스터디를 더욱 체계적이고 효율적으로 관리하는데 도움이 됩니다."));
+            log.info("email 발송 성공");
+        }
 
         log.info("내정보 등록 성공");
         return "redirect:/member/connect";
