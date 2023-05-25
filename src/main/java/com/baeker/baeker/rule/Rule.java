@@ -40,7 +40,6 @@ public class Rule extends BaseEntity {
     private int count;
     private String difficulty;
 
-    private int test;
 
     @OneToMany(mappedBy = "rule", cascade = ALL)
     @Builder.Default
