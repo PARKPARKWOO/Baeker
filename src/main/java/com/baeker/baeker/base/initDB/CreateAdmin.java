@@ -36,7 +36,9 @@ public class CreateAdmin {
         private final SolvedApiService solvedApiService;
 
 
-        public void createAdmin() throws IOException, ParseException {
+
+        public void init_alpha_and_study() throws IOException, ParseException {
+
             Optional<Member> member = memberService.getMember("admin");
             if (member.isEmpty()) {
                 createMember("admin", "운영자", "", "https://avatars.dicebear.com/api/avataaars/600.svg", "sunnight9507");
