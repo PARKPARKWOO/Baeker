@@ -24,7 +24,7 @@ public class CreateAdmin {
 
     @PostConstruct
     public void init() throws IOException, ParseException {
-        initService.createAdmin();
+        initService.init_alpha_and_study();
     }
 
     @Component
