@@ -2,7 +2,6 @@ package com.baeker.baeker.member;
 
 import com.baeker.baeker.base.request.Rq;
 import com.baeker.baeker.base.request.RsData;
-import com.baeker.baeker.member.embed.BaekJoonDto;
 import com.baeker.baeker.member.form.*;
 import com.baeker.baeker.member.snapshot.MemberSnapshot;
 
