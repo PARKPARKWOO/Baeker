@@ -11,7 +11,7 @@ spring:
             scope: friends, talk_message, account_email, profile_nickname, profile_image
             client-name: Kakao
             authorization-grant-type: authorization_code
-            redirect-uri: https://www.baeker.1ll.ca//login/oauth2/code/kakao
+            redirect-uri: https://www.baeker.1ll.ca/login/oauth2/code/kakao
             client-authentication-method: POST
 
         provider:
@@ -32,4 +32,3 @@ scheduler:
   cron:
     member: "0 0 18 * * *"
     study: "0 0 19 * * *"
-
