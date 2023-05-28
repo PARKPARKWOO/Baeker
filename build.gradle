@@ -33,6 +33,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // 타임 리프 사용하는 경우만 추가
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' // 타임 리프 사용하는 경우만 추가
 
+    // monitering
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-core'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
