@@ -32,4 +32,3 @@ scheduler:
   cron:
     member: "0 0 18 * * *"
     study: "0 0 19 * * *"
-
