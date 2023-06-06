@@ -57,7 +57,7 @@ public class StudyRuleServiceTests {
     @DisplayName(value = "생성 메서드 테스트")
     void createTests() {
         //
-        RuleForm ruleForm = new RuleForm("name", "about", 1, 3,"provider", "gold");
+        RuleForm ruleForm = new RuleForm("name", "about", "1", "3","provider", "gold");
         Member member = create("wy9295", "wy9295");
         Study study = createStudy("study", "study", 1, member).getData();
         StudyRuleForm studyRuleForm = new StudyRuleForm("aaaa", "소개", study.getId());
@@ -79,7 +79,7 @@ public class StudyRuleServiceTests {
     @DisplayName("수정 메서드")
     void modifyTests() {
         //
-        RuleForm ruleForm = new RuleForm("name", "about", 1, 3,"provider", "gold");
+        RuleForm ruleForm = new RuleForm("name", "about", "1", "3","provider", "gold");
         Member member = create("wy9295", "wy9295");
         Study study = createStudy("study", "study", 1, member).getData();
         StudyRuleForm studyRuleForm = new StudyRuleForm("aaaa", "소개", study.getId());
@@ -110,7 +110,7 @@ public class StudyRuleServiceTests {
     @DisplayName("삭제 메서드 테스트")
     void deleteTests() {
         //
-        RuleForm ruleForm = new RuleForm("name", "about", 1, 3,"provider", "gold");
+        RuleForm ruleForm = new RuleForm("name", "about", "1", "3","provider", "gold");
         Member member = create("wy9295", "wy9295");
         Study study = createStudy("study", "study", 1, member).getData();
         StudyRuleForm studyRuleForm = new StudyRuleForm("aaaa", "소개", study.getId());
