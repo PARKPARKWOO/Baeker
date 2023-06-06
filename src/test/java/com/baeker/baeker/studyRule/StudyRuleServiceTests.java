@@ -28,17 +28,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StudyRuleServiceTests {
 
     @Autowired
-    private StudyRuleRepository studyRuleRepository;
+    StudyRuleRepository studyRuleRepository;
 
     @Autowired
-    private StudyRuleService studyRuleService;
+    StudyRuleService studyRuleService;
 
     @Autowired
-    private RuleService ruleService;
+    RuleService ruleService;
     @Autowired
-    private MemberService memberService;
+    MemberService memberService;
     @Autowired
-    private StudyService studyService;
+    StudyService studyService;
 
     private Member create(String username, String name) {
         MemberJoinForm form = new MemberJoinForm(username, name, "", "1234", "1234", "");

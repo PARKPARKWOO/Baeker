@@ -44,5 +44,4 @@ public class Rule extends BaseEntity {
     @OneToMany(mappedBy = "rule", cascade = ALL)
     @Builder.Default
     private List<StudyRule> studyRules = new ArrayList<>();
-
 }
