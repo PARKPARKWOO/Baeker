@@ -42,4 +42,4 @@ function toastWarning(msg) {
     if (needToShow) {
         toastr["warning"](pureMsg, "경고");
     }
-}임
+}
