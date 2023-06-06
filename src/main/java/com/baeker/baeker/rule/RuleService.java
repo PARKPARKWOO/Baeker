@@ -32,8 +32,8 @@ public class RuleService {
         Rule rule = Rule.builder()
                 .name(ruleForm.getName())
                 .about(ruleForm.getAbout())
-                .xp(ruleForm.getXp())
-                .count(ruleForm.getCount())
+                .xp(Integer.parseInt(ruleForm.getXp()))
+                .count(Integer.parseInt(ruleForm.getCount()))
                 .provider(ruleForm.getProvider())
                 .difficulty(ruleForm.getDifficulty())
                 .build();
@@ -54,8 +54,8 @@ public class RuleService {
                 .name(ruleForm.getName())
                 .about(ruleForm.getAbout())
                 .provider(ruleForm.getProvider())
-                .xp(ruleForm.getXp())
-                .count(ruleForm.getCount())
+                .xp(Integer.parseInt(ruleForm.getXp()))
+                .count(Integer.parseInt(ruleForm.getCount()))
                 .difficulty(ruleForm.getDifficulty())
                 .build();
         ruleRepository.save(rule1);
@@ -70,8 +70,10 @@ public class RuleService {
         } else {
             throw new NotFoundData("이름이 없음");
         }
-        ruleForm.setXp(rule.getXp());
-        ruleForm.setCount(rule.getCount());
+        String strXp = String.valueOf(rule.getXp());
+        String strCount = String.valueOf(rule.getCount());
+        ruleForm.setXp(strXp);
+        ruleForm.setCount(strCount);
         if (rule.getAbout() != null) {
             ruleForm.setAbout(rule.getAbout());
         } else {
@@ -130,6 +132,7 @@ public class RuleService {
     @Transactional
     public void delete(Rule rule) {
         this.ruleRepository.delete(rule);
+
         RsData.of("S-1", "규칙이 삭제 되었습니다.");
     }
 
