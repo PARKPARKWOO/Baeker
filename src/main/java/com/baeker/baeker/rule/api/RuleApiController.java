@@ -26,13 +26,13 @@ public class RuleApiController {
      * name, about, xp,
      * count, provider, difficulty
      */
-    @PostMapping("/rules")
-    public CreateRuleResponse createRule(@RequestBody @Valid CreateRuleRequest request) {
-        RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(),request.getXp() , request.getCount(), request.getProvider(), request.getDifficulty());
-        Rule rule = ruleService.create(ruleForm).getData();
-
-        return new CreateRuleResponse(rule.getId());
-    }
+//    @PostMapping("/rules")
+//    public CreateRuleResponse createRule(@RequestBody @Valid CreateRuleRequest request) {
+//        RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(),request.getXp() , request.getCount(), request.getProvider(), request.getDifficulty());
+//        Rule rule = ruleService.create(ruleForm).getData();
+//
+//        return new CreateRuleResponse(rule.getId());
+//    }
 
     /**
      * 수정
@@ -40,15 +40,15 @@ public class RuleApiController {
      * name, about, xp
      * count, provider, difficulty
      */
-    @PutMapping("/{id}")
-    public ModifyRuleResponse modifyRule(@PathVariable("id") Long id,
-                                         @RequestBody @Valid ModifyRuleRequest request) {
-        RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(),request.getXp(), request.getCount(), request.getProvider(), request.getDifficulty());
-        ruleService.modify(id, ruleForm);
-        Rule rule = ruleService.getRule(id).getData();
-
-        return new ModifyRuleResponse(rule.getName(), rule.getAbout(), rule.getXp(),rule.getCount() ,rule.getProvider() ,rule.getDifficulty());
-    }
+//    @PutMapping("/{id}")
+//    public ModifyRuleResponse modifyRule(@PathVariable("id") Long id,
+//                                         @RequestBody @Valid ModifyRuleRequest request) {
+//        RuleForm ruleForm = new RuleForm(request.getName(), request.getAbout(),request.getXp(), request.getCount(), request.getProvider(), request.getDifficulty());
+//        ruleService.modify(id, ruleForm);
+//        Rule rule = ruleService.getRule(id).getData();
+//
+//        return new ModifyRuleResponse(rule.getName(), rule.getAbout(), rule.getXp(),rule.getCount() ,rule.getProvider() ,rule.getDifficulty());
+//    }
 
     /**
      * 조회
